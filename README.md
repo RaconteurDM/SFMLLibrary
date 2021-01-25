@@ -1,0 +1,2 @@
+# SFMLLibrary
+SFML Complementary library
