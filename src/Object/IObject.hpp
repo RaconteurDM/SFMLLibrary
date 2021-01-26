@@ -12,7 +12,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-class IObject
+class IObject : public sf::IntRect
 {
 public:
     typedef enum type_e
@@ -26,10 +26,14 @@ public:
 
     virtual IObject *getParent() = 0;
     virtual sf::Vector2f getParentRelativePosition() const = 0;
+    virtual sf::Vector2f getPosition() const = 0;
+    virtual void setPosition() = 0;
 
     virtual Type getType() const = 0;
 
     virtual sf::Vector2f getParentRelativeScale() const = 0;
+    virtual sf::Vector2f getScale() const = 0;
+    virtual void setScale() = 0;
 
     virtual bool isExecGlobal() const = 0;
     virtual bool isOnGlobalPlan() const = 0;

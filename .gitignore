@@ -34,3 +34,7 @@
 # Tests
 
 tests
+
+#vscode
+
+*.vscode

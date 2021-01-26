@@ -10,15 +10,23 @@
 #include <SFML/Graphics.hpp>
 #include "../Object/Object.hpp"
 
-class IContainer : public Object, public sf::IntRect
+class IContainer : public Object
 {
 public:
-    IContainer(std::string name) : Object(name) {};
+    IContainer(std::string name, IObject *parent = NULL) : Object(name, parent) {};
     ~IContainer();
 
-    virtual IObject *getChilds(std::string Name) = 0;
+    virtual IObject *getChild(std::string Name) = 0;
+    virtual std::map<std::string, IObject *> getAllChilds() const = 0;
+
+    virtual bool canPlace(IObject *NewChild, bool absoluteCondition) const = 0;
 
     virtual void addChild(std::string Name, IObject *NewChild) = 0;
+
+    virtual IObject *detachChild(std::string name) = 0;
+    virtual void removeChild(std::string name) = 0;
+    virtual void removeAllChilds();
+
 protected:
     std::map<std::string, IObject *> _childs;
 };

@@ -13,8 +13,8 @@
 class Object : public IObject
 {
 public:
-    Object(std::string name) { _name = name; };
-    virtual ~Object(){};
+    inline Object(std::string name, IObject *parent = NULL) { _name = name; _parent = parent; };
+    inline ~Object(){};
 
     inline IObject *getParent() override { return _parent; };
     inline sf::Vector2f getParentRelativePosition() const override { return _parentRelativePosition; };
