@@ -28,8 +28,6 @@ public:
 
     inline std::string getGlobalId() const override { return _globalId; };
 
-    virtual void exec() = 0;
-
     virtual std::string getName() const { return _name; };
 
 protected:

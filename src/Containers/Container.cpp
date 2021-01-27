@@ -87,3 +87,14 @@ void Container::removeAllChilds()
         it = _childs.erase(it);
     }
 }
+
+void Container::exec()
+{
+    auto it = _childs.begin();
+
+    while (it != _childs.end())
+    {
+        if (it->second->isExecGlobal())
+            it->second->exec();
+    }
+}

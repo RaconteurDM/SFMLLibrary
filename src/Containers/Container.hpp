@@ -27,6 +27,11 @@ public:
     void removeChild(std::string name) override;
     void removeAllChilds() override;
 
+    virtual void exec() override;
+
     virtual void setPosition() override;
     virtual void setScale() override;
+
+    virtual sf::Vector2f getPosition() const override { return sf::Vector2f(left, top); };
+    virtual sf::Vector2f getScale() const override { return sf::Vector2f(width, height); };
 };
