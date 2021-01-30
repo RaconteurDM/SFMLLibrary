@@ -38,3 +38,8 @@ tests
 #vscode
 
 *.vscode
+
+#gdb
+
+.gdb_history
+peda-session-a.out.txt

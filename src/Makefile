@@ -5,21 +5,24 @@
 ## Makefile
 ##
 
-CC = g++ -c
-CC_FLAGS = -std=c++14 -static -Wall -Wextra -W
+EXEC = libMySFML.a
+SOURCES =	$(wildcard Containers/*.cpp)	\
+			$(wildcard Containers/Window/*.cpp)	\
+			$(wildcard Object/*.cpp)	\
+			$(wildcard Errors/*.cpp)	\
+			$(wildcard LinkObj/*.cpp)	\
 
-EXEC = libMySFML
-SOURCES =	$(wildcard *.cpp)	\
-			$(wildcard */*.cpp) \
-			$(wildcard */*/*.cpp)	\
-OBJECTS = $(SOURCES:.cpp=.o)
-HEADERS =	$(wildcard *.hpp)	\
-			$(wildcard */*.hpp) \
-			$(wildcard */*/*.hpp)	\
+OBJECTS =	$(SOURCES:.cpp=.o)
+
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 
+DEBUG = -g -ggdb -g3
+
 lib:	$(OBJECTS)
-	$(CC) $(OBJECTS) -o $(EXEC) $(LIBS)
+	ar rcs $(EXEC) $(OBJECTS)
 
 clean:
-	rm -f $(EXEC) $(OBJECTS)
+	rm -rf $(OBJECTS)
+
+fclean: clean
+	rm -rf $(EXEC)

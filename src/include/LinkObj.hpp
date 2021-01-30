@@ -10,13 +10,15 @@
 #include <map>
 #include <iostream>
 
-#include "../Object/IObject.hpp"
+#include "IObject.hpp"
 
 class LinkObj
 {
 public:
     LinkObj() {};
     ~LinkObj() {};
+
+    typedef std::map<std::string, IObject *> objectMapT;
 
     IObject *getGlobalObj(const std::string &Id);
 
@@ -26,5 +28,6 @@ public:
     void delGlobObj(const std::string &Id);
 
 private:
-    static std::map<std::string, IObject *> _objectMap;
+    static inline objectMapT createMap() { objectMapT map; return map; };
+    static objectMapT _objectMap;
 };

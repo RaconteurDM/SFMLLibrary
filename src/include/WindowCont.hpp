@@ -7,9 +7,8 @@
 
 #pragma once
 
-#include "../Container.hpp"
-#include "../../Errors/MySfmlExeptions.hpp"
-#include "Window.hpp"
+#include "Container.hpp"
+#include "MySfmlExeptions.hpp"
 
 class WindowCont : public Container
 {
@@ -25,4 +24,5 @@ public:
 
 protected:
     sf::RenderWindow *window;
+    sf::Event _event;
 };

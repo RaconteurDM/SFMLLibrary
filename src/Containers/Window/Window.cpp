@@ -5,7 +5,7 @@
 ** Window
 */
 
-#include "Window.hpp"
+#include "../../include/Window.hpp"
 
 Window::Window(std::string name, sf::Vector2f scale, sf::Color backgroundColor)
 {
@@ -17,5 +17,8 @@ Window::Window(std::string name, sf::Vector2f scale, sf::Color backgroundColor)
 
 Window::~Window()
 {
-    _mainWindow = NULL;
+    if (_mainWindow)
+        delete _mainWindow;
 }
+
+WindowCont * Window::_mainWindow = NULL;

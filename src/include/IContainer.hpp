@@ -8,13 +8,13 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "../Object/Object.hpp"
+#include "Object.hpp"
 
 class IContainer : public Object
 {
 public:
     IContainer(std::string name, IObject *parent = NULL) : Object(name, parent) {};
-    ~IContainer();
+    virtual ~IContainer() {};
 
     virtual IObject *getChild(std::string Name) = 0;
     virtual std::map<std::string, IObject *> getAllChilds() const = 0;
@@ -25,7 +25,7 @@ public:
 
     virtual IObject *detachChild(std::string name) = 0;
     virtual void removeChild(std::string name) = 0;
-    virtual void removeAllChilds();
+    virtual void removeAllChilds() = 0;
 
 protected:
     std::map<std::string, IObject *> _childs;

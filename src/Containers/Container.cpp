@@ -5,8 +5,8 @@
 ** Container
 */
 
-#include "Container.hpp"
-#include "../Errors/MySfmlExeptions.hpp"
+#include "../include/Container.hpp"
+#include "../include/MySfmlExeptions.hpp"
 
 Container::Container(std::string name, sf::Vector2f parentRelativePos, sf::Vector2f parentRelativeScale, IObject *parent) : IContainer(name)
 {

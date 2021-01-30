@@ -5,8 +5,8 @@
 ** LinkObj
 */
 
-#include "LinkObj.hpp"
-#include "../Errors/MySfmlExeptions.hpp"
+#include "../include/LinkObj.hpp"
+#include "../include/MySfmlExeptions.hpp"
 
 IObject *LinkObj::getGlobalObj(const std::string &Id)
 {
@@ -36,3 +36,5 @@ void LinkObj::addGlobObj(const std::string &Id, IObject *Obj)
         throw MySfmlExeptions("delGlobObj", "Try to add inexistant Object to Global Object");
     _objectMap[Id] = Obj;
 }
+
+LinkObj::objectMapT LinkObj::_objectMap = LinkObj::createMap();

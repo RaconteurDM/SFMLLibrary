@@ -8,7 +8,7 @@
 #pragma once
 
 #include "IObject.hpp"
-#include "../LinkObj/LinkObj.hpp"
+#include "LinkObj.hpp"
 
 class Object : public IObject
 {
