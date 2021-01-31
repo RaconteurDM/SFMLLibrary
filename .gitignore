@@ -31,10 +31,6 @@
 *.out
 *.app
 
-# Tests
-
-tests
-
 #vscode
 
 *.vscode
@@ -42,4 +38,5 @@ tests
 #gdb
 
 .gdb_history
-peda-session-a.out.txt
+peda-session-*.txt
+vgcore*

@@ -6,7 +6,8 @@
 ##
 
 EXEC = test
-SOURCES =	 main.cpp	\
+
+SOURCES =	 tests/main.cpp
 
 OBJECTS =	$(SOURCES:.cpp=.o)
 
@@ -29,7 +30,7 @@ re:		$(OBJECTS)
 	g++ -o $(EXEC) $(OBJECTS) $(LIBS) -I./src/include
 
 debug:	$(OBJECTS)
-	g++ -o $(EXEC) $(OBJECTS) $(LIBS) -I./src/include $(DEBUG)
+	g++ -o $(EXEC) $(SOURCES) src/*/*.cpp src/*/*/*.cpp -lsfml-graphics -lsfml-window -lsfml-system -I./src/include -g -ggdb -g3
 
 clean:
 	make -sC src clean
