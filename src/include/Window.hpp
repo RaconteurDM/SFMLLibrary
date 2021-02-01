@@ -8,7 +8,7 @@
 #pragma once
 
 #include "Container.hpp"
-#include "MySfmlExeptions.hpp"
+#include "CGEExeptions.hpp"
 #include "WindowCont.hpp"
 
 namespace cge

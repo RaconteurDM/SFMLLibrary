@@ -6,7 +6,7 @@
 */
 
 #include "../include/LinkObj.hpp"
-#include "../include/MySfmlExeptions.hpp"
+#include "../include/CGEExeptions.hpp"
 
 cge::IObject *cge::LinkObj::getGlobalObj(const std::string &Id)
 {

@@ -6,7 +6,7 @@
 */
 
 #include "../include/Parser.hpp"
-#include "../include/MySfmlExeptions.hpp"
+#include "../include/CGEExeptions.hpp"
 #include <vector>
 #include <regex>
 #include <fstream>

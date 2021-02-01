@@ -6,7 +6,7 @@
 */
 
 #include "../include/Container.hpp"
-#include "../include/MySfmlExeptions.hpp"
+#include "../include/CGEExeptions.hpp"
 
 cge::Container::Container(std::string name, sf::Vector2f parentRelativePos, sf::Vector2f parentRelativeScale, IObject *parent) : IContainer(name)
 {

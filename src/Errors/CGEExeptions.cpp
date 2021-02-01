@@ -5,7 +5,7 @@
 ** MySfmlExeptions
 */
 
-#include "../include/MySfmlExeptions.hpp"
+#include "../include/CGEExeptions.hpp"
 
 cge::cgeExeptions::cgeExeptions(const std::string &where, const std::string &what)
     : _what(what), _where(where)
