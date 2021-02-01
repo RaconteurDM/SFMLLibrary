@@ -12,22 +12,29 @@
 
 #include "IObject.hpp"
 
-class LinkObj
+namespace cge
 {
-public:
-    LinkObj() {};
-    ~LinkObj() {};
+    class LinkObj
+    {
+    public:
+        LinkObj(){};
+        ~LinkObj(){};
 
-    typedef std::map<std::string, IObject *> objectMapT;
+        typedef std::map<std::string, IObject *> objectMapT;
 
-    IObject *getGlobalObj(const std::string &Id);
+        IObject *getGlobalObj(const std::string &Id);
 
-    void execGlobObj(const std::string &Id);
+        void execGlobObj(const std::string &Id);
 
-    void addGlobObj(const std::string &Id, IObject *Obj);
-    void delGlobObj(const std::string &Id);
+        void addGlobObj(const std::string &Id, IObject *Obj);
+        void delGlobObj(const std::string &Id);
 
-private:
-    static inline objectMapT createMap() { objectMapT map; return map; };
-    static objectMapT _objectMap;
-};
+    private:
+        static inline objectMapT createMap()
+        {
+            objectMapT map;
+            return map;
+        };
+        static objectMapT _objectMap;
+    };
+} // namespace cge

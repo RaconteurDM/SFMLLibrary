@@ -12,6 +12,7 @@
  
 int main()
 {
-    Parser test = Parser("tests/test.txt", Parser::MAP, NULL);
+    cge::Parser test = cge::Parser("tests/test.txt", cge::Parser::MAP, NULL);
     std::cout << test.getTextMap("    ");
+    return (cge::Window("Test", sf::Vector2f(600, 600)).getWindow()->loop());
 }

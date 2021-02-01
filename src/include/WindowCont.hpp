@@ -10,19 +10,22 @@
 #include "Container.hpp"
 #include "MySfmlExeptions.hpp"
 
-class WindowCont : public Container
+namespace cge
 {
-public:
-    WindowCont(std::string name, sf::Vector2f scale, sf::Color backgroundColor = sf::Color::Black);
-    ~WindowCont();
+    class WindowCont : public Container
+    {
+    public:
+        WindowCont(std::string name, sf::Vector2f scale, sf::Color backgroundColor = sf::Color::Black);
+        ~WindowCont();
 
-    void initWindow(std::string name, sf::Vector2f scale, sf::Color backgroundColor);
-    sf::RenderWindow *getWindow();
+        void initWindow(std::string name, sf::Vector2f scale, sf::Color backgroundColor);
+        sf::RenderWindow *getWindow();
 
-    int loop();
-    int launch();
+        int loop();
+        int launch();
 
-protected:
-    sf::RenderWindow *window;
-    sf::Event _event;
-};
+    protected:
+        sf::RenderWindow *window;
+        sf::Event _event;
+    };
+} // namespace cge

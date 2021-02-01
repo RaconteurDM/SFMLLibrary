@@ -47,7 +47,7 @@ static void removeByRegex(std::string &target, const std::string &strRegex)
     target = std::regex_replace(target, shape, "");
 }
 
-Parser::Parser(std::string string, Types type, Parser *parent) : _parent(parent), _type(type)
+cge::Parser::Parser(std::string string, Types type, Parser *parent) : _parent(parent), _type(type)
 {
 
     if (_type == MAP)
@@ -60,25 +60,25 @@ Parser::Parser(std::string string, Types type, Parser *parent) : _parent(parent)
     }
 }
 
-Parser::Parser(std::string name, std::map<std::string, std::string> blockMap, Parser *parent) : _parent(parent)
+cge::Parser::Parser(std::string name, std::map<std::string, std::string> blockMap, Parser *parent) : _parent(parent)
 {
     blockParse(name, blockMap);
     _type = MAP;
 }
 
-Parser::Parser(int integer, Parser *parent) : _parent(parent)
+cge::Parser::Parser(int integer, Parser *parent) : _parent(parent)
 {
     _type = INTEGER;
     _intValue = integer;
 }
 
-Parser::Parser(double floatNumber, Parser *parent) : _parent(parent)
+cge::Parser::Parser(double floatNumber, Parser *parent) : _parent(parent)
 {
     _type = DOUBLE;
     _doubleValue = floatNumber;
 }
 
-Parser::~Parser()
+cge::Parser::~Parser()
 {
     for (auto it = _mapValue.begin(); it != _mapValue.end(); it++)
     {
@@ -86,7 +86,7 @@ Parser::~Parser()
     }
 }
 
-std::map<std::string, std::string> Parser::blockClass(std::vector<std::string> blockList)
+std::map<std::string, std::string> cge::Parser::blockClass(std::vector<std::string> blockList)
 {
     std::map<std::string, std::string> blockMap;
     std::vector<std::string> tmpBlock;
@@ -95,28 +95,28 @@ std::map<std::string, std::string> Parser::blockClass(std::vector<std::string> b
     {
         tmpBlock = splitByRegexSeparator(*it, "[[:space:]]*:[[:space:]]*");
         if (tmpBlock.size() != 2)
-            throw MySfmlExeptions("Parser::blockClass", std::string("Invalid block: ") + *it);
+            throw MySfmlExeptions("cge::Parser::blockClass", std::string("Invalid block: ") + *it);
         if (blockMap.find(tmpBlock[0]) != blockMap.end())
-            throw MySfmlExeptions("Parser::blockClass", std::string("Block: ") + tmpBlock[0] + std::string(" already defined"));
+            throw MySfmlExeptions("cge::Parser::blockClass", std::string("Block: ") + tmpBlock[0] + std::string(" already defined"));
         blockMap[tmpBlock[0]] = tmpBlock[1];
     }
     return (blockMap);
 }
 
-void Parser::dataParse(std::string name, std::string data, std::map<std::string, std::string> blockMap)
+void cge::Parser::dataParse(std::string name, std::string data, std::map<std::string, std::string> blockMap)
 {
     std::vector<std::string> tmpData;
 
     if (_mapValue.find(name) != _mapValue.end())
     {
-        throw MySfmlExeptions("Parser::blockClass", std::string("Data: ") + name + std::string(" already defined"));
+        throw MySfmlExeptions("cge::Parser::blockClass", std::string("Data: ") + name + std::string(" already defined"));
     }
     if (std::regex_match(data, std::regex("\".*\"")))
     {
         tmpData = splitByRegexSeparator(data, "\"");
         if (tmpData.size() != 2)
         {
-            throw MySfmlExeptions("Parser::dataParse", std::string("Invalid data: ") + data);
+            throw MySfmlExeptions("cge::Parser::dataParse", std::string("Invalid data: ") + data);
         }
         _mapValue[name] = new Parser(tmpData[1], STRING, this);
     }
@@ -136,7 +136,7 @@ void Parser::dataParse(std::string name, std::string data, std::map<std::string,
     }
 }
 
-void Parser::blockParse(std::string name, std::map<std::string, std::string> blockMap)
+void cge::Parser::blockParse(std::string name, std::map<std::string, std::string> blockMap)
 {
     std::vector<std::string> mainLines;
     std::vector<std::string> tmpLine;
@@ -151,13 +151,13 @@ void Parser::blockParse(std::string name, std::map<std::string, std::string> blo
         tmpLine = splitByRegexSeparator(*it, "[[:space:]]*=[[:space:]]*");
         if (tmpLine.size() != 2)
         {
-            throw MySfmlExeptions("Parser::blockParse", std::string("Invalid line: ") + *it);
+            throw MySfmlExeptions("cge::Parser::blockParse", std::string("Invalid line: ") + *it);
         }
         dataParse(tmpLine[0], tmpLine[1], blockMap);
     }
 }
 
-void Parser::loadFile(std::string &file)
+void cge::Parser::loadFile(std::string &file)
 {
     std::ifstream ifs(file);
     std::string content((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
@@ -166,11 +166,11 @@ void Parser::loadFile(std::string &file)
     removeByRegex(content, "([^[:space:]]*.*:.*[\\{]([[:space:]]*[^[:space:]].*=.*\n)*[\\}])");
     if (!std::regex_match(content, std::regex("[[:space:]]*")))
     {
-        throw MySfmlExeptions("Parser::loadFile", std::string("Invalid blocks:") + content);
+        throw MySfmlExeptions("cge::Parser::loadFile", std::string("Invalid blocks:") + content);
     }
 }
 
-std::string Parser::getTextMap(std::string basicIndent, std::string actualIndent)
+std::string cge::Parser::getTextMap(std::string basicIndent, std::string actualIndent)
 {
     std::string ret = "";
     auto nextIndent = actualIndent;

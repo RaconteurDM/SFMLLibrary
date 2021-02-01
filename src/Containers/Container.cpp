@@ -8,7 +8,7 @@
 #include "../include/Container.hpp"
 #include "../include/MySfmlExeptions.hpp"
 
-Container::Container(std::string name, sf::Vector2f parentRelativePos, sf::Vector2f parentRelativeScale, IObject *parent) : IContainer(name)
+cge::Container::Container(std::string name, sf::Vector2f parentRelativePos, sf::Vector2f parentRelativeScale, IObject *parent) : IContainer(name)
 {
     _name = name;
     _parent = parent;
@@ -20,23 +20,23 @@ Container::Container(std::string name, sf::Vector2f parentRelativePos, sf::Vecto
         ((Container *)parent)->addChild(name, this);
 }
 
-Container::~Container()
+cge::Container::~Container()
 {
 }
 
-void Container::setPosition()
+void cge::Container::setPosition()
 {
     left = _parentRelativePosition.x * _parent->getScale().x + _parent->getPosition().x;
     top = _parentRelativePosition.y * _parent->getScale().y + _parent->getPosition().y;
 }
 
-void Container::setScale()
+void cge::Container::setScale()
 {
     width = _parentRelativeScale.x * _parent->getScale().x;
     top = _parentRelativeScale.y * _parent->getScale().y;
 }
 
-bool Container::canPlace(IObject *NewChild, bool absoluteCondition) const
+bool cge::Container::canPlace(IObject *NewChild, bool absoluteCondition) const
 {
     std::map<std::string, IObject *> childsMap = getAllChilds();
 
@@ -50,7 +50,7 @@ bool Container::canPlace(IObject *NewChild, bool absoluteCondition) const
     return (true);
 }
 
-void Container::addChild(std::string Name, IObject *NewChild)
+void cge::Container::addChild(std::string Name, IObject *NewChild)
 {
     NewChild->setPosition();
     NewChild->setScale();
@@ -58,7 +58,7 @@ void Container::addChild(std::string Name, IObject *NewChild)
     _childs[Name] = NewChild;
 }
 
-IObject *Container::detachChild(std::string name)
+cge::IObject *cge::Container::detachChild(std::string name)
 {
     IObject *toReturn;
 
@@ -69,7 +69,7 @@ IObject *Container::detachChild(std::string name)
     return toReturn;
 }
 
-void Container::removeChild(std::string name)
+void cge::Container::removeChild(std::string name)
 {
     if (!_childs[name])
         throw MySfmlExeptions("Container::removeChild", "Try to remove inexistant child (name = \"" + name + "\")");
@@ -77,7 +77,7 @@ void Container::removeChild(std::string name)
     _childs.erase(name);
 }
 
-void Container::removeAllChilds()
+void cge::Container::removeAllChilds()
 {
     auto it = _childs.begin();
 
@@ -88,7 +88,7 @@ void Container::removeAllChilds()
     }
 }
 
-void Container::exec()
+void cge::Container::exec()
 {
     auto it = _childs.begin();
 

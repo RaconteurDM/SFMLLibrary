@@ -11,13 +11,16 @@
 #include "MySfmlExeptions.hpp"
 #include "WindowCont.hpp"
 
-class Window
+namespace cge
 {
-public:
-    Window(std::string name, sf::Vector2f scale, sf::Color backgroundColor = sf::Color::Black);
-    inline Window () {};
-    ~Window();
+    class Window
+    {
+    public:
+        Window(std::string name, sf::Vector2f scale, sf::Color backgroundColor = sf::Color::Black);
+        inline Window(){};
+        ~Window();
 
-    inline WindowCont *getWindow() { return _mainWindow; };
-    static WindowCont *_mainWindow;
-};
+        inline WindowCont *getWindow() { return _mainWindow; };
+        static WindowCont *_mainWindow;
+    };
+} // namespace cge

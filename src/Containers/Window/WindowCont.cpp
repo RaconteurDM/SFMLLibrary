@@ -8,27 +8,27 @@
 #include "../../include/WindowCont.hpp"
 
 
-WindowCont::WindowCont(std::string name, sf::Vector2f scale, sf::Color backgroundColor)
+cge::WindowCont::WindowCont(std::string name, sf::Vector2f scale, sf::Color backgroundColor)
     : Container(name, sf::Vector2f(0, 0), sf::Vector2f(1, 1))
 {
     window = NULL;
     initWindow(name, scale, backgroundColor);
 }
 
-WindowCont::~WindowCont()
+cge::WindowCont::~WindowCont()
 {
     if (window)
         delete window;
 }
 
-void WindowCont::initWindow(std::string name, sf::Vector2f scale, sf::Color backgroundColor)
+void cge::WindowCont::initWindow(std::string name, sf::Vector2f scale, sf::Color backgroundColor)
 {
     if (window)
         throw MySfmlExeptions("WindowCont:initWindow", "Already initialyzed");
     window = new sf::RenderWindow(sf::VideoMode(scale.x, scale.y), name);
 }
 
-int WindowCont::loop()
+int cge::WindowCont::loop()
 {
     while (window->isOpen()) {
         while (window->pollEvent(_event))
@@ -44,7 +44,7 @@ int WindowCont::loop()
     return (0);
 }
 
-int WindowCont::launch()
+int cge::WindowCont::launch()
 {
     initWindow("MyTest", sf::Vector2f(600, 600), sf::Color::Black);
     return (loop());

@@ -10,37 +10,46 @@
 #include "IObject.hpp"
 #include "LinkObj.hpp"
 
-class Object : public IObject
+namespace cge
 {
-public:
-    inline Object(std::string name, IObject *parent = NULL) { _name = name; _parent = parent; };
-    inline ~Object(){};
+    class Object : public IObject
+    {
+    public:
+        inline Object(std::string name, IObject *parent = NULL)
+        {
+            _name = name;
+            _parent = parent;
+        };
+        inline ~Object(){};
 
-    inline IObject *getParent() override { return _parent; };
-    inline sf::Vector2f getParentRelativePosition() const override { return _parentRelativePosition; };
+        inline IObject *getParent() override { return _parent; };
+        inline sf::Vector2f getParentRelativePosition() const override { return _parentRelativePosition; };
 
-    inline Type getType() const override { return _type; };
+        inline Type getType() const override { return _type; };
 
-    inline virtual sf::Vector2f getParentRelativeScale() const override { return _parentRelativeScale; };
+        inline virtual sf::Vector2f getParentRelativeScale() const override { return _parentRelativeScale; };
 
-    inline bool isExecGlobal() const override { return _execIsGlobal; };
-    inline bool isOnGlobalPlan() const override { return _isOnGlobalPlan; };
+        inline bool isExecGlobal() const override { return _execIsGlobal; };
+        inline bool isOnGlobalPlan() const override { return _isOnGlobalPlan; };
 
-    inline std::string getGlobalId() const override { return _globalId; };
+        inline std::string getGlobalId() const override { return _globalId; };
 
-    virtual std::string getName() const { return _name; };
+        virtual std::string getName() const { return _name; };
 
-protected:
+    protected:
+        inline void setParentRelativePosition(sf::Vector2f &NewPos) override { _parentRelativePosition = NewPos; };
 
-    inline void setParentRelativePosition(sf::Vector2f &NewPos) override { _parentRelativePosition = NewPos; };
+        inline void setType(Type &NewType) override { _type = NewType; };
 
-    inline void setType(Type &NewType) override { _type = NewType; };
+        inline virtual void setParentRelativeScale(sf::Vector2f &NewScale) override { _parentRelativeScale = NewScale; };
 
-    inline virtual void setParentRelativeScale(sf::Vector2f &NewScale) override { _parentRelativeScale = NewScale; };
+        inline void setExecGlobal(bool &value) override { _execIsGlobal = value; };
+        inline void setPlanGlobal(bool &value) override { _isOnGlobalPlan = value; };
 
-    inline void setExecGlobal(bool &value) override { _execIsGlobal = value; };
-    inline void setPlanGlobal(bool &value) override { _isOnGlobalPlan = value; };
-
-    inline void setGlobalId(std::string &id) override { LinkObj().addGlobObj(id, this); _globalId = id; };
-};
-
+        void setGlobalId(std::string &id) override
+        {
+            LinkObj().addGlobObj(id, this);
+            _globalId = id;
+        };
+    };
+} // namespace cge
