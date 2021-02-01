@@ -15,7 +15,7 @@ cge::Container::Container(std::string name, sf::Vector2f parentRelativePos, sf::
     _parentRelativeScale = parentRelativeScale;
     _parentRelativePosition = parentRelativePos;
     if (parent != NULL && parent->getType() != CONTAINER)
-        throw MySfmlExeptions("Container::Container", "Object creation with parent that can't hold child");
+        throw cgeExeptions("Container::Container", "Object creation with parent that can't hold child");
     else if (parent != NULL)
         ((Container *)parent)->addChild(name, this);
 }
@@ -44,7 +44,7 @@ bool cge::Container::canPlace(IObject *NewChild, bool absoluteCondition) const
     {
         if (it->second->isOnGlobalPlan() && it->second->intersects(*((sf::IntRect *)NewChild)))
             if (absoluteCondition)
-                throw MySfmlExeptions("Container::canPlace", "Try to place " + NewChild->getName() + " on " + it->second->getName());
+                throw cgeExeptions("Container::canPlace", "Try to place " + NewChild->getName() + " on " + it->second->getName());
             return (false);
     }
     return (true);
@@ -63,7 +63,7 @@ cge::IObject *cge::Container::detachChild(std::string name)
     IObject *toReturn;
 
     if (!_childs[name])
-        throw MySfmlExeptions("Container::detachChild", "Try to detach inexistant child (name = \"" + name + "\")");
+        throw cgeExeptions("Container::detachChild", "Try to detach inexistant child (name = \"" + name + "\")");
     toReturn = _childs[name];
     _childs.erase(name);
     return toReturn;
@@ -72,7 +72,7 @@ cge::IObject *cge::Container::detachChild(std::string name)
 void cge::Container::removeChild(std::string name)
 {
     if (!_childs[name])
-        throw MySfmlExeptions("Container::removeChild", "Try to remove inexistant child (name = \"" + name + "\")");
+        throw cgeExeptions("Container::removeChild", "Try to remove inexistant child (name = \"" + name + "\")");
     delete _childs[name];
     _childs.erase(name);
 }

@@ -11,21 +11,21 @@
 cge::IObject *cge::LinkObj::getGlobalObj(const std::string &Id)
 {
     if (!_objectMap[Id])
-        throw MySfmlExeptions("execGlobObj", "Try to get an inexistant Global Object");
+        throw cgeExeptions("execGlobObj", "Try to get an inexistant Global Object");
     return _objectMap[Id];
 }
 
 void cge::LinkObj::execGlobObj(const std::string &Id)
 {
     if (!_objectMap[Id])
-        throw MySfmlExeptions("execGlobObj", "Try to exec from inexistant Global Object");
+        throw cgeExeptions("execGlobObj", "Try to exec from inexistant Global Object");
     _objectMap[Id]->exec();
 }
 
 void cge::LinkObj::delGlobObj(const std::string &Id)
 {
     if (!_objectMap[Id])
-        throw MySfmlExeptions("delGlobObj", "Try to delete id from inexistant Global Object");
+        throw cgeExeptions("delGlobObj", "Try to delete id from inexistant Global Object");
     _objectMap[Id] = NULL;
     _objectMap.erase(Id);
 }
@@ -33,7 +33,7 @@ void cge::LinkObj::delGlobObj(const std::string &Id)
 void cge::LinkObj::addGlobObj(const std::string &Id, IObject *Obj)
 {
     if (!Obj)
-        throw MySfmlExeptions("delGlobObj", "Try to add inexistant Object to Global Object");
+        throw cgeExeptions("delGlobObj", "Try to add inexistant Object to Global Object");
     _objectMap[Id] = Obj;
 }
 

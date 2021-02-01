@@ -7,16 +7,16 @@
 
 #include "../include/MySfmlExeptions.hpp"
 
-cge::MySfmlExeptions::MySfmlExeptions(const std::string &where, const std::string &what)
+cge::cgeExeptions::cgeExeptions(const std::string &where, const std::string &what)
     : _what(what), _where(where)
 {
 }
 
-cge::MySfmlExeptions::MySfmlExeptions(const std::string &where, const MySfmlExeptions &other)
+cge::cgeExeptions::cgeExeptions(const std::string &where, const cgeExeptions &other)
     : _what(other.what()), _where(where + "/" + other.where())
 {
 }
 
-cge::MySfmlExeptions::~MySfmlExeptions()
+cge::cgeExeptions::~cgeExeptions()
 {
 }

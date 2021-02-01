@@ -12,7 +12,7 @@ cge::Window::Window(std::string name, sf::Vector2f scale, sf::Color backgroundCo
     if (!_mainWindow)
         _mainWindow = new WindowCont(name, scale, backgroundColor);
     else
-        throw MySfmlExeptions("Window:Window", "You should only use the default constructor after window initialization");
+        throw cgeExeptions("Window:Window", "You should only use the default constructor after window initialization");
 }
 
 cge::Window::~Window()

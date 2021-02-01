@@ -24,7 +24,7 @@ cge::WindowCont::~WindowCont()
 void cge::WindowCont::initWindow(std::string name, sf::Vector2f scale, sf::Color backgroundColor)
 {
     if (window)
-        throw MySfmlExeptions("WindowCont:initWindow", "Already initialyzed");
+        throw cgeExeptions("WindowCont:initWindow", "Already initialyzed");
     window = new sf::RenderWindow(sf::VideoMode(scale.x, scale.y), name);
 }
 

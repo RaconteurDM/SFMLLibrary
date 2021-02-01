@@ -11,12 +11,12 @@
 
 namespace cge
 {
-    class MySfmlExeptions
+    class cgeExeptions
     {
     public:
-        MySfmlExeptions(const std::string &where, const std::string &what);
-        MySfmlExeptions(const std::string &where, const MySfmlExeptions &other);
-        ~MySfmlExeptions();
+        cgeExeptions(const std::string &where, const std::string &what);
+        cgeExeptions(const std::string &where, const cgeExeptions &other);
+        ~cgeExeptions();
 
         std::string what() const { return _what; };
         std::string where() const { return _where; };
