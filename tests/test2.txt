@@ -1,0 +1,8 @@
+main : {
+    test = 42
+    testlol = <mytestrec>
+}
+
+mytestrec : {
+    lol = "ça marche"
+}

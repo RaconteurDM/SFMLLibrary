@@ -3,6 +3,7 @@ main : {
     test2 = "test"
     test3 = 42.42
     test4 = <testmap>
+    test5 = (test2.txt)
 }
 
 testmap : {

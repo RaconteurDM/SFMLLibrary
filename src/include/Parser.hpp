@@ -37,15 +37,23 @@ namespace cge
         void blockParse(std::string name, std::map<std::string, std::string> blockMap);
         void dataParse(std::string name, std::string data, std::map<std::string, std::string> blockMap);
 
-        std::string getTextMap(std::string basicIndent, std::string actualIndent = "");
+        std::string getTextMap(std::string basicIndent, std::string actualIndent = "") const;
+
+        inline std::string getAppRelativePath() const { return _appRelativePath; }; 
+
+        Parser &operator[](const std::string &name);
 
     private:
         Parser *_parent;
         Types _type;
 
+        std::string _appRelativePath;
+
         int _intValue;
         double _doubleValue;
         std::string _stringValue;
         std::map<std::string, Parser *> _mapValue;
+
+        void setAppRelativePath(std::string path);
     };
 } // namespace cge
