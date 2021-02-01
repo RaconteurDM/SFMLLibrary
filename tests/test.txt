@@ -1,5 +1,5 @@
 main : {
-    test = 42
+    test = "test"
     test2 = "test"
     test3 = 42.42
     test4 = <testmap>

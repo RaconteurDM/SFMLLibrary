@@ -145,6 +145,9 @@ void cge::Parser::dataParse(std::string name, std::string data, std::map<std::st
         removeByRegex(data, "\\)");
         _mapValue[name] = new Parser(data, MAP, this);
     }
+    else {
+        throw cgeExeptions("cge::Parser::dataParse", std::string("Invalid data: ") + data);
+    }
 }
 
 void cge::Parser::blockParse(std::string name, std::map<std::string, std::string> blockMap)
