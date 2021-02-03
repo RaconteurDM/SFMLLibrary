@@ -1,0 +1,8 @@
+main : {
+    testInt = 42
+    testBlock = <testBlock>
+}
+
+testBlock : {
+    testString = "test"
+}

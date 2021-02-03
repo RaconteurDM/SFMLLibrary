@@ -1,0 +1,9 @@
+main : {
+    testInt = 42
+    testBlock = <testBlock>
+}
+
+testBlock : {
+    testString = "test"
+    testFile = (SubDirTest/testMultiFile1-3.txt)
+}

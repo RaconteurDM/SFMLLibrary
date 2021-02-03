@@ -1,0 +1,17 @@
+name: OnPushDev
+on: 
+  push:
+    branches:
+      - dev
+jobs:
+  unit-test:
+    name: unit-test
+    runs-on: ubuntu-20.04
+    container: epitechcontent/epitest-docker
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: dev
+      - name: runTest
+        run: make tests_run

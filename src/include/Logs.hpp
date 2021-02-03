@@ -13,11 +13,12 @@ namespace cge
     class LogUnit
     {
     public:
-        inline LogUnit(std::string name, bool directDisplay = false) : _directDisplay(directDisplay) {};
+        inline LogUnit(std::string name, bool directDisplay = false) : _name(name), _directDisplay(directDisplay) {};
         inline ~LogUnit() {};
 
         void addLine(std::string message);
 
+        std::string _name;
         bool _directDisplay;
     };
 

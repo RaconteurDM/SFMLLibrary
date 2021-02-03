@@ -1,0 +1,12 @@
+{
+    testBlock : {
+        testBlock2 : {
+            testString4 : "test"
+        }
+        testString3 : "test"
+    }
+    testDouble : 42.420000
+    testInt : 42
+    testString : "test"
+    testString2 : "test"
+}

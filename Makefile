@@ -32,6 +32,21 @@ re:		$(OBJECTS)
 debug:	$(OBJECTS)
 	g++ -o $(EXEC) $(SOURCES) src/*/*.cpp src/*/*/*.cpp -lsfml-graphics -lsfml-window -lsfml-system -I./src/include -g -ggdb -g3
 
+genresp:
+	make -sC src lib
+	g++ -o genresp tests/UnitTests/GenResp.cpp $(LIBS) -I./src/include -Werror -Wall -Wextra
+
+genrespdebug:
+	make -sC src lib
+	g++ -o genresp tests/UnitTests/GenResp.cpp src/*/*.cpp src/*/*/*.cpp -lsfml-graphics -lsfml-window -lsfml-system -I./src/include -g -ggdb -g3
+
+tests_run:
+	make -sC src lib
+	g++ -o tests_run tests/UnitTests/UnitTest.cpp src/*/*.cpp src/*/*/*.cpp -lsfml-graphics -lsfml-window -lsfml-system -lcriterion -I./src/include --coverage
+	./tests_run --verbose
+	gcovr
+	make -sC . fclean
+
 clean:
 	make -sC src clean
 	rm -rf $(OBJECTS)
@@ -39,3 +54,7 @@ clean:
 fclean: clean
 	make -sC src fclean
 	rm -rf $(EXEC)
+	rm -rf genresp
+	rm -rf tests_run
+	rm -f *.gcda
+	rm -f *.gcno
