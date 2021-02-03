@@ -14,7 +14,7 @@ int main(void)
 {
     try
     {
-        std::cout << cge::Parser("tests/UnitTests/FilesTests/testOneFileErrorData1.txt", cge::Parser::MAP, NULL).getTextMap("    ");
+        std::cout << cge::Parser("tests/UnitTests/FilesTests/testMultiFileError1.txt", cge::Parser::MAP, NULL).getTextMap("    ");
     }
     catch (cge::cgeExeptions &e)
     {

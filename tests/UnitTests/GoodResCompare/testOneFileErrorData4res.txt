@@ -1,0 +1,12 @@
+cge::Parser::loadFile: Parser error in file: tests/UnitTests/FilesTests/testOneFileErrorData4.txt: Invalid blocks: 
+main  {
+    testString = "test"
+    testString2 = "test"
+    testDouble = 42.42
+    testInt = 42
+    testBlock = <testblock>
+}
+
+
+
+

@@ -91,3 +91,60 @@ Test(Parser, ErrorOneFileDataError2)
 
     cr_assert(cmp.compare("") != 0, "Invalid or empty file for test");
 }
+
+Test(Parser, ErrorOneFileDataError3)
+{
+    std::string file("tests/UnitTests/GoodResCompare/testOneFileErrorData3res.txt");
+    auto cmp = openFile(file);
+    std::string toTest = "";
+    try
+    {
+        toTest = cge::Parser("tests/UnitTests/FilesTests/testOneFileErrorData3.txt", cge::Parser::MAP, NULL).getTextMap("    ");
+    }
+    catch (cge::cgeExeptions &e)
+    {
+        std::cout << e.where() << ": " << e.what() << std::endl;
+        cr_expect(cmp.compare(e.where() + ": " + e.what() + "\n") == 0, "Invalid resp");
+    }
+    cr_expect(toTest.compare("") == 0, "No exeption thrown");
+
+    cr_assert(cmp.compare("") != 0, "Invalid or empty file for test");
+}
+
+Test(Parser, ErrorOneFileDataError4)
+{
+    std::string file("tests/UnitTests/GoodResCompare/testOneFileErrorData4res.txt");
+    auto cmp = openFile(file);
+    std::string toTest = "";
+    try
+    {
+        toTest = cge::Parser("tests/UnitTests/FilesTests/testOneFileErrorData4.txt", cge::Parser::MAP, NULL).getTextMap("    ");
+    }
+    catch (cge::cgeExeptions &e)
+    {
+        std::cout << e.where() << ": " << e.what() << std::endl;
+        cr_expect(cmp.compare(e.where() + ": " + e.what() + "\n") == 0, "Invalid resp");
+    }
+    cr_expect(toTest.compare("") == 0, "No exeption thrown");
+
+    cr_assert(cmp.compare("") != 0, "Invalid or empty file for test");
+}
+
+Test(Parser, ErrorMultiFileDataError1)
+{
+    std::string file("tests/UnitTests/GoodResCompare/testMultiFileError1res.txt");
+    auto cmp = openFile(file);
+    std::string toTest = "";
+    try
+    {
+        toTest = cge::Parser("tests/UnitTests/FilesTests/testMultiFileError1.txt", cge::Parser::MAP, NULL).getTextMap("    ");
+    }
+    catch (cge::cgeExeptions &e)
+    {
+        std::cout << e.where() << ": " << e.what() << std::endl;
+        cr_expect(cmp.compare(e.where() + ": " + e.what() + "\n") == 0, "Invalid resp");
+    }
+    cr_expect(toTest.compare("") == 0, "No exeption thrown");
+
+    cr_assert(cmp.compare("") != 0, "Invalid or empty file for test");
+}

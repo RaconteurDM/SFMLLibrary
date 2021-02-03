@@ -1,0 +1,3 @@
+main : {
+    filetest = (testOneFileErrorData3.txt)
+}

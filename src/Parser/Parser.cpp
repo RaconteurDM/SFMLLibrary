@@ -25,6 +25,8 @@ cge::Parser::Parser(std::string string, Types type, Parser *parent) : _parent(pa
         {
             if (_parent == NULL)
                 throw cgeExeptions(e.where(), "Parser error in file: " + string + ": " + e.what());
+            else
+                throw cgeExeptions(e.where(), e.what());
         }
     }
     else if (_type == STRING)
@@ -116,7 +118,14 @@ void cge::Parser::dataParse(std::string name, std::string data, std::map<std::st
     {
         removeByRegex(data, "\\(");
         removeByRegex(data, "\\)");
-        _mapValue[name] = new Parser(data, MAP, this);
+        try
+        {
+            _mapValue[name] = new Parser(data, MAP, this);
+        }
+        catch (cgeExeptions &e)
+        {
+            throw cgeExeptions(e.where(), e.what() + " of file: " + data + ": ");
+        }
     }
     else
     {
