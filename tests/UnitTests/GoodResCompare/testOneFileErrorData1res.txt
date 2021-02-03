@@ -1,0 +1,1 @@
+cge::Parser::dataParse: Parser error in file: tests/UnitTests/FilesTests/testOneFileErrorData1.txt: Invalid data: '"test' in line 'testString = "test' in block 'main'

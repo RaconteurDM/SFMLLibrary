@@ -8,8 +8,16 @@
 #include "../../src/include/Window.hpp"
 #include "../../src/include/Parser.hpp"
 #include "../../src/include/Logs.hpp"
+#include "../../src/include/CGEExeptions.hpp"
 
 int main(void)
 {
-    std::cout << cge::Parser("tests/UnitTests/FilesTests/testMultiFile1-1.txt", cge::Parser::MAP, NULL).getTextMap("    ");
+    try
+    {
+        std::cout << cge::Parser("tests/UnitTests/FilesTests/testOneFileErrorData1.txt", cge::Parser::MAP, NULL).getTextMap("    ");
+    }
+    catch (cge::cgeExeptions &e)
+    {
+        std::cout << e.where() << ": " << e.what() << std::endl;
+    }
 }

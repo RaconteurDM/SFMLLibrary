@@ -14,16 +14,24 @@
 
 cge::Parser::Parser(std::string string, Types type, Parser *parent) : _parent(parent), _type(type)
 {
-
     if (_type == MAP)
     {
-        setAppRelativePath(string);
-        loadFile(_appRelativePath);
+        try
+        {
+            setAppRelativePath(string);
+            loadFile(_appRelativePath);
+        }
+        catch (cgeExeptions &e)
+        {
+            if (_parent == NULL)
+                throw cgeExeptions(e.where(), "Parser error in file: " + string + ": " + e.what());
+        }
     }
     else if (_type == STRING)
     {
         _stringValue = string;
-        _appRelativePath = _parent->_appRelativePath;
+        if (_parent)
+            _appRelativePath = _parent->_appRelativePath;
     }
 }
 
@@ -110,8 +118,9 @@ void cge::Parser::dataParse(std::string name, std::string data, std::map<std::st
         removeByRegex(data, "\\)");
         _mapValue[name] = new Parser(data, MAP, this);
     }
-    else {
-        throw cgeExeptions("cge::Parser::dataParse", std::string("Invalid data: ") + data);
+    else
+    {
+        throw cgeExeptions("cge::Parser::dataParse", std::string("Invalid data: '") + data + "'");
     }
 }
 
@@ -122,7 +131,7 @@ void cge::Parser::blockParse(std::string name, std::map<std::string, std::string
 
     if (blockMap.find(name) == blockMap.end())
     {
-        throw cgeExeptions("Parser:blockParse", std::string("Can't find ") + name + std::string("block"));
+        throw cgeExeptions("Parser:blockParse", std::string("Can't find '") + name + std::string("' block"));
     }
     mainLines = splitByRegexTokens(blockMap[name], "[^[:space:]].*=.*");
     for (auto it = mainLines.begin(); it != mainLines.end(); it++)
@@ -130,9 +139,16 @@ void cge::Parser::blockParse(std::string name, std::map<std::string, std::string
         tmpLine = splitByRegexSeparator(*it, "[[:space:]]*=[[:space:]]*");
         if (tmpLine.size() != 2)
         {
-            throw cgeExeptions("cge::Parser::blockParse", std::string("Invalid line: ") + *it);
+            throw cgeExeptions("cge::Parser::blockParse", std::string("Invalid line: '") + *it + "'" + std::string(" in block '") + name + "'");
         }
-        dataParse(tmpLine[0], tmpLine[1], blockMap);
+        try
+        {
+            dataParse(tmpLine[0], tmpLine[1], blockMap);
+        }
+        catch (cgeExeptions &e)
+        {
+            throw cgeExeptions(e.where(), e.what() + std::string(" in line '") + *it + "'" + std::string(" in block '") + name + "'");
+        }
     }
 }
 
@@ -140,18 +156,23 @@ void cge::Parser::loadFile(std::string &file)
 {
     std::ifstream ifs(file);
     std::string content;
+    std::string testContent;
 
     if (ifs.is_open())
+    {
         content = std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+        testContent = content;
+    }
     else
-        throw cgeExeptions("cge::Parser::loadFile", std::string("Invalid file:") + _appRelativePath);
+        throw cgeExeptions("cge::Parser::loadFile", std::string("Invalid file: ") + _appRelativePath);
+
+    removeByRegex(testContent, "([^[:space:]]*.*:.*[\\{]([[:space:]]*[^[:space:]].*=.*\n)*[\\}])");
+    if (!std::regex_match(testContent, std::regex("[[:space:]]*")))
+    {
+        throw cgeExeptions("cge::Parser::loadFile", std::string("Invalid blocks: \n") + testContent);
+    }
 
     blockParse("main", blockClass(splitByRegexTokens(content, "([^[:space:]]*.*:.*[\\{]([[:space:]]*[^[:space:]].*=.*\n)*[\\}])")));
-    removeByRegex(content, "([^[:space:]]*.*:.*[\\{]([[:space:]]*[^[:space:]].*=.*\n)*[\\}])");
-    if (!std::regex_match(content, std::regex("[[:space:]]*")))
-    {
-        throw cgeExeptions("cge::Parser::loadFile", std::string("Invalid blocks:") + content);
-    }
 }
 
 std::string cge::Parser::getTextMap(std::string basicIndent, std::string actualIndent) const
