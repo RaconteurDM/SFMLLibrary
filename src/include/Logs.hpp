@@ -5,9 +5,11 @@
 ** Logs
 */
 
-#include <map>
-
 #pragma once
+
+#include <map>
+#include <iostream>
+
 namespace cge
 {
     class LogUnit
