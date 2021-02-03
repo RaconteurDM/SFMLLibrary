@@ -7,45 +7,10 @@
 
 #include "../include/Parser.hpp"
 #include "../include/CGEExeptions.hpp"
+#include "../include/GeneralLib.hpp"
 #include <vector>
 #include <regex>
 #include <fstream>
-
-static std::vector<std::string> splitByRegexTokens(const std::string &toTokenize, const std::string &strRegex)
-{
-    std::vector<std::string> res;
-    std::regex shape(strRegex);
-    std::sregex_token_iterator defaultToken;
-    std::sregex_token_iterator Tokens(toTokenize.begin(), toTokenize.end(), shape, 0);
-
-    while (Tokens != defaultToken)
-    {
-        res.push_back(*Tokens);
-        Tokens++;
-    }
-    return (res);
-}
-
-static std::vector<std::string> splitByRegexSeparator(const std::string &toTokenize, const std::string &strRegex)
-{
-    std::vector<std::string> res;
-    std::regex shape(strRegex);
-    std::sregex_token_iterator defaultToken;
-    std::sregex_token_iterator Tokens(toTokenize.begin(), toTokenize.end(), shape, -1);
-
-    while (Tokens != defaultToken)
-    {
-        res.push_back(*Tokens);
-        Tokens++;
-    }
-    return (res);
-}
-
-static void removeByRegex(std::string &target, const std::string &strRegex)
-{
-    std::regex shape(strRegex);
-    target = std::regex_replace(target, shape, "");
-}
 
 cge::Parser::Parser(std::string string, Types type, Parser *parent) : _parent(parent), _type(type)
 {

@@ -11,7 +11,9 @@ SOURCES =	$(wildcard Containers/*.cpp)	\
 			$(wildcard Object/*.cpp)	\
 			$(wildcard Errors/*.cpp)	\
 			$(wildcard LinkObj/*.cpp)	\
-			$(wildcard Parser/*.cpp)
+			$(wildcard Parser/*.cpp)	\
+			$(wildcard GeneralLib/*.cpp)	\
+			$(wildcard Logs/*.cpp)
 
 OBJECTS =	$(SOURCES:.cpp=.o)
 
