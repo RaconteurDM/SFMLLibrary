@@ -69,11 +69,8 @@ Test(Parser, ErrorOneFileDataError1)
         cr_expect(cmp.compare(e.where() + ": " + e.what() + "\n") == 0, "Invalid resp");
     }
     cr_expect(toTest.compare("") == 0, "No exeption thrown");
-    auto message = "Expected: " + cmp + "\nbut got: " + toTest;
 
     cr_assert(cmp.compare("") != 0, "Invalid or empty file for test");
-    if (cmp.compare(toTest) != 0)
-        std::cout << message << std::endl;
 }
 
 Test(Parser, ErrorOneFileDataError2)
@@ -91,9 +88,6 @@ Test(Parser, ErrorOneFileDataError2)
         cr_expect(cmp.compare(e.where() + ": " + e.what() + "\n") == 0, "Invalid resp");
     }
     cr_expect(toTest.compare("") == 0, "No exeption thrown");
-    auto message = "Expected: " + cmp + "\nbut got: " + toTest;
 
     cr_assert(cmp.compare("") != 0, "Invalid or empty file for test");
-    if (cmp.compare(toTest) != 0)
-        std::cout << message << std::endl;
 }
