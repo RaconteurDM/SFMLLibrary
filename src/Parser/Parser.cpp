@@ -29,8 +29,8 @@ cge::Parser::Parser(std::string string, Types type, Parser *parent) : _parent(pa
 
 cge::Parser::Parser(std::string name, std::map<std::string, std::string> blockMap, Parser *parent) : _parent(parent)
 {
-    blockParse(name, blockMap);
     _appRelativePath = _parent->_appRelativePath;
+    blockParse(name, blockMap);
     _type = MAP;
 }
 

@@ -11,5 +11,5 @@
 
 int main(void)
 {
-    std::cout << cge::Parser("tests/UnitTests/FilesTests/testOneFile1.txt", cge::Parser::MAP, NULL).getTextMap("    ");
+    std::cout << cge::Parser("tests/UnitTests/FilesTests/testMultiFile1-1.txt", cge::Parser::MAP, NULL).getTextMap("    ");
 }

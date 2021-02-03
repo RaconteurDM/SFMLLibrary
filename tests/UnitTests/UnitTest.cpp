@@ -40,3 +40,16 @@ Test(Parser, SimpleFileWithBlocks)
     if (cmp.compare(toTest) != 0)
         std::cout << message << std::endl;
 }
+
+Test(Parser, MultiFile)
+{
+    std::string file("tests/UnitTests/GoodResCompare/testMultiFile1res.txt");
+    auto cmp = openFile(file);
+    auto toTest = cge::Parser("tests/UnitTests/FilesTests/testMultiFile1-1.txt", cge::Parser::MAP, NULL).getTextMap("    ");
+    auto message = "Expected: " + cmp + "\nbut got: " + toTest;
+
+    cr_assert(cmp.compare("") != 0, "Invalid or empty file for test");
+    cr_expect(cmp.compare(toTest) == 0, "Invalid resp");
+    if (cmp.compare(toTest) != 0)
+        std::cout << message << std::endl;
+}
